@@ -53,7 +53,7 @@ resource "aws_security_group" "automate_ec2_sg" {
 resource "aws_instance" "my_instance" {
   # count = 2
   for_each = tomap({
-    "my_instance_1" = "t2.micro"
+    "${var.env}-auto-instance" = "t2.micro"
   })
 
   depends_on = [ aws_security_group.automate_ec2_sg, aws_key_pair.my-key , aws_default_vpc.default ]
