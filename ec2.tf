@@ -1,6 +1,10 @@
 resource "aws_key_pair" "my-key" {
   key_name   = "my-terra-key"
   public_key = file("./my-terra-key.pub")    
+  tags = {
+    Name = "my-terra-key"
+    Environment = var.env
+  }
 }
 
 resource "aws_default_vpc" "default" {
@@ -15,6 +19,7 @@ resource "aws_security_group" "automate_ec2_sg" {
 
   tags = {
     "Name"= "automate-sg"
+     Environment = var.env
   }
 
   ingress {
